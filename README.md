@@ -1,4 +1,4 @@
-# Verificação Automatica do Windows
+# StarCheck 1.4
 
 ## Multi-language Support
 
