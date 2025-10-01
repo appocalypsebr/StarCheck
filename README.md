@@ -2,7 +2,7 @@
 
 ## Multi-language Support
 
-This project provides scripts for automatic verification and repair of Windows systems, with support for multiple languages.
+This project provides scripts for automatic verification and repair of Windows systems, and best settings for running Star Citizen, with support for multiple languages.
 
 ### Available Languages
 
