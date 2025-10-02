@@ -26,3 +26,31 @@ Feel free to contribute translations or improvements! To add another language, c
 ## License
 
 MIT License
+
+
+# Suporte Multi-idioma (PT-BR)
+
+Este projeto fornece scripts para verificação e reparo automático de sistemas Windows, além das melhores configurações para rodar Star Citizen, com suporte a múltiplos idiomas.
+
+### Idiomas Disponíveis
+
+- **Português (BR):** `Automação SC BR.bat`
+- **Inglês (EN):** `Automation SC EN.bat`
+
+Escolha o script que corresponde ao seu idioma preferido.
+
+## Como Usar
+
+1. Baixe ou clone este repositório.
+2. Execute o arquivo `.bat` do seu idioma:
+   - Para Português: Clique duas vezes em `Automação SC BR.bat`
+   - Para Inglês: Clique duas vezes em `Automation SC EN.bat`
+3. Siga as instruções na tela.
+
+## Contribuição
+
+Sinta-se à vontade para contribuir com traduções ou melhorias! Para adicionar outro idioma, copie um dos scripts existentes, traduza as mensagens e envie um pull request.
+
+## Licença
+
+Licença MIT
