@@ -250,10 +250,20 @@ if !total! GEQ !recomendado! (
 	
 ) else (
     echo "Está abaixo do recomendado^! (!recomendado! MB ou 30 GB) ajuste para 30GB ou mais^!"
+	echo.
+	echo Instruções para ajustar a memória virtual:
+	echo 1. Pressione Win + R, digite "sysdm.cpl" e pressione Enter.
+	echo 2. Vá para a aba "Avançado" e clique em "Configurações..." na seção "Desempenho".
+	echo 3. Na nova janela, vá para a aba "Avançado" e clique em "Alterar..." na seção "Memória Virtual".
+	echo 4. Desmarque "Gerenciar automaticamente o tamanho do arquivo de paginação para todas as unidades".
+	echo 5. De preferencia selecione uma unidade diferente da do Windows, mas caso somente tenha uma unidade, selecione a unidade onde o Windows está instalado (geralmente C:).
+	echo 6. Selecione "Tamanho personalizado" e defina o "Tamanho inicial" e "Tamanho máximo" para pelo menos 30000 MB (30 GB).
+	echo 7. Clique em "Definir" e depois em "OK" para aplicar as mudanças.
+	echo 8. Reinicie o computador para que as mudanças tenham efeito.
 )
 
 endlocal
-
+	
 echo.
 echo Se continuar com problemas ^> Ajuste sua memória virtual para no mínimo 30 GB, de preferência em um SSD diferente do Windows.
 echo.

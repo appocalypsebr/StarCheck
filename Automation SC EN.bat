@@ -250,7 +250,17 @@ if !total! GEQ !recommended! (
 	 )
 
 ) else (
-    echo "Below recommended^! (!recommended! MB or 30 GB) Please set to 30GB or more!"
+	echo "Below recommended^! (!recommended! MB or 30 GB) Please set to 30GB or more!"
+	echo.
+	echo Instructions to adjust your virtual memory:
+	echo 1. Press Win + R, type "sysdm.cpl" and press Enter.
+	echo 2. Go to the "Advanced" tab and click "Settings..." in the "Performance" section.
+	echo 3. In the new window, go to the "Advanced" tab and click "Change..." in the "Virtual Memory" section.
+	echo 4. Uncheck "Automatically manage paging file size for all drives".
+	echo 5. Preferably select a drive different from Windows, but if you only have one, select the drive where Windows is installed (usually C:).
+	echo 6. Select "Custom size" and set both "Initial size" and "Maximum size" to at least 30000 MB (30 GB).
+	echo 7. Click "Set" and then "OK" to apply the changes.
+	echo 8. Restart your computer for the changes to take effect.
 )
 
 endlocal
