@@ -38,8 +38,8 @@ echo 2 - Executar apenas DISM (Verificar Instalação Windows)
 echo 3 - Executar ambos (SFC e DISM)
 echo 4 - Executar Limpeza do SC (Remove pasta temporária do Star Citizen)
 echo 5 - Abrir RSI Launcher
-echo 6 - Executar Tudo (SFC + DSIM + Limpeza do SC)
-echo 7 - Memoria Virtual (Recomenda 30GB ou mais)
+echo 6 - Executar Tudo (SFC + DISM + Limpeza do SC)
+echo 7 - Memoria Virtual (Recomendado 30GB ou mais)
 echo 8 - Gerar Relatório do Sistema
 echo 9 - Resetar Conta RSI (Se estiver com problemas dentro do jogo)
 echo 0 - Sair
