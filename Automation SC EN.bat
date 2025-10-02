@@ -2,7 +2,7 @@
 chcp 1252
 title Windows System Check and Repair
 color 1F
-set "version=v1.4"
+set "version=v1.6"
 echo.
 echo Starting StarCheck %version%...
 echo.
@@ -31,7 +31,7 @@ cls
 echo.
 echo ***************************************************
 echo *  *         * *                  *         *   * *
-echo *   [ NoLaser Systems :: StarCheck "%version%" ] *   *   *
+echo *   [ NoLaser Systems :: StarCheck %version% ] *   *   *
 echo * * SYSTEM CHECK AND REPAIR         *    *     *
 echo *   Preparing for launch to the stars...   *  *
 echo *   * *    *             *            *   *       *
@@ -223,9 +223,13 @@ cls
 echo ============================================
 echo     VIRTUAL MEMORY CONFIGURATION
 echo ============================================
-echo.
-echo WMI
-wmic pagefile list /format:list
+@REM echo DEBUG WMI
+@REM echo WMI
+@REM wmic pagefile list /format:list
+@REM echo.
+@REM echo DEBUG InitialSize
+@REM wmic path Win32_PageFileSetting get InitialSize
+
 set /a total=0
 
 setlocal enabledelayedexpansion
@@ -255,17 +259,19 @@ if !total! GEQ !recommended! (
 	 )
 
 ) else (
-	echo "Below recommended^! (!recommended! MB or 30 GB) Please set to 30GB or more!"
-	echo.
+	echo Below recommended^^! Please set it to above the !recommended!MB or more^^!
 	echo Instructions to adjust your virtual memory:
 	echo 1. Press Win + R, type "sysdm.cpl" and press Enter.
 	echo 2. Go to the "Advanced" tab and click "Settings..." in the "Performance" section.
 	echo 3. In the new window, go to the "Advanced" tab and click "Change..." in the "Virtual Memory" section.
 	echo 4. Uncheck "Automatically manage paging file size for all drives".
-	echo 5. Preferably select a drive different from Windows, but if you only have one, select the drive where Windows is installed (usually C:).
-	echo 6. Select "Custom size" and set both "Initial size" and "Maximum size" to at least 30000 MB (30 GB).
+	echo 5. Preferably select a drive different from Windows, but if you only have one, select the drive where Windows is installed ^(usually C:^).
+	echo 6. Select "Custom size" and set both "Initial size" and "Maximum size" to at least !recommended!MB.
 	echo 7. Click "Set" and then "OK" to apply the changes.
 	echo 8. Restart your computer for the changes to take effect.
+	echo.
+	echo Starting the configuration panel for you...
+	start /B "" "sysdm.cpl" >nul 2>&1
 )
 
 endlocal

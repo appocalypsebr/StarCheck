@@ -1,0 +1,91 @@
+
+Nome do host:                              PC-DIEGO
+Nome do sistema operacional:               Microsoft Windows 11 Pro
+Versão do sistema operacional:             10.0.26100 N/A compilação 26100
+Fabricante do sistema operacional:         Microsoft Corporation
+Configuração do sistema operacional:       Estação de trabalho autônoma
+Tipo de compilação do sistema operacional: Multiprocessor Free
+Proprietário registrado:                   Diego
+Organização registrada:                    
+Identificação do produto:                  00331-20020-00000-AA284
+Data da instalação original:               08/05/2025, 22:14:26
+Tempo de Inicialização do Sistema:         02/10/2025, 15:40:05
+Fabricante do sistema:                     ASUS
+Modelo do sistema:                         System Product Name
+Tipo de sistema:                           x64-based PC
+Processador(es):                           1 processador(es) instalado(s).
+                                           [01]: Intel64 Family 6 Model 167 Stepping 1 GenuineIntel ~3600 Mhz
+Versão do BIOS:                            American Megatrends Inc. 2302, 13/11/2024
+Diretório do Windows:                      C:\WINDOWS
+Diretório do sistema:                      C:\WINDOWS\system32
+Inicializar dispositivo:                   \Device\HarddiskVolume4
+Localidade do sistema:                     pt-br;Português (Brasil)
+Localidade de entrada:                     pt-br;Português (Brasil)
+Fuso horário:                              (UTC-03:00) Brasília
+Memória física total:                      32.597 MB
+Memória física disponível:                 22.713 MB
+Memória Virtual: Tamanho Máximo:           63.597 MB
+Memória Virtual: Disponível:               51.676 MB
+Memória Virtual: Em Uso:                   11.921 MB
+Local(s) do Arquivo de Página:             C:\pagefile.sys
+                                           E:\pagefile.sys
+Domínio:                                   WORKGROUP
+Servidor de Logon:                         \\PC-DIEGO
+Hotfix(es):                                4 hotfix(es) instalado(s).
+                                           [01]: KB5064401
+                                           [02]: KB5065789
+                                           [03]: KB5064531
+                                           [04]: KB5067437
+Placa(s) de Rede:                          8 NIC(s) instalado(s).
+                                           [01]: VirtualBox Host-Only Ethernet Adapter
+                                                 Nome da conexão: Ethernet 5
+                                                 DHCP ativado:    Não
+                                                 Endereço(es) IP
+                                                 [01]: 169.254.152.112
+                                                 [02]: fe80::ce7e:a13b:a33c:a9d1
+                                           [02]: Bluetooth Device (Personal Area Network)
+                                                 Nome da conexão: Conexão de Rede Bluetooth
+                                                 Status:          Mídia desconectada
+                                           [03]: VirtualBox Host-Only Ethernet Adapter
+                                                 Nome da conexão: Ethernet 4
+                                                 DHCP ativado:    Não
+                                                 Endereço(es) IP
+                                                 [01]: 169.254.202.192
+                                                 [02]: fe80::e07f:e5f5:6db7:8d88
+                                           [04]: Famatech Radmin VPN Ethernet Adapter
+                                                 Nome da conexão: Radmin VPN
+                                                 DHCP ativado:    Não
+                                                 Endereço(es) IP
+                                                 [01]: 26.187.43.93
+                                                 [02]: fe80::59b2:beed:f755:cafd
+                                                 [03]: fdfd::1abb:2b5d
+                                           [05]: VirtualBox Host-Only Ethernet Adapter
+                                                 Nome da conexão: Ethernet 7
+                                                 DHCP ativado:    Não
+                                                 Endereço(es) IP
+                                                 [01]: 169.254.125.91
+                                                 [02]: fe80::4106:df30:647c:e304
+                                           [06]: VirtualBox Host-Only Ethernet Adapter
+                                                 Nome da conexão: Ethernet 2
+                                                 DHCP ativado:    Não
+                                                 Endereço(es) IP
+                                                 [01]: 192.168.56.1
+                                                 [02]: fe80::8a6a:b1fd:471f:22dc
+                                           [07]: Intel(R) Ethernet Controller (3) I225-V
+                                                 Nome da conexão: Ethernet 3
+                                                 DHCP ativado:    Sim
+                                                 Servidor DHCP:   192.168.1.1
+                                                 Endereço(es) IP
+                                                 [01]: 192.168.1.6
+                                                 [02]: fe80::c004:216e:5f88:2bb8
+                                           [08]: Intel(R) Wi-Fi 6E AX210 160MHz
+                                                 Nome da conexão: Wi-Fi
+                                                 Status:          Mídia desconectada
+Segurança baseada em virtualização:        Status: Não habilitado
+                                           App Control for Business policy: Imposto
+                                           App Control for Business user mode policy: Desativado
+                                           Recursos de Segurança Habilitados:
+Requisitos do Hyper-V:                     Extensão de Modo de Monitor VM: Sim
+                                           Virtualização Habilitada no Firmware: Não
+                                           Conversão de Endereços de Segundo Nível: Sim
+                                           Prevenção de Execução de Dados Disponível: Sim

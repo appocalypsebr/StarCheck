@@ -2,9 +2,9 @@
 chcp 1252
 title Verificação e Correção do Sistema Windows
 color 1F
-
+set "version=v1.6"
 echo.
-echo Iniciando StarCheck v1.4...
+echo Iniciando StarCheck %version%...
 echo.
 echo Verificando se está sendo executado como administrador...
 echo.
@@ -19,8 +19,8 @@ if %errorlevel% neq 0 (
 setlocal
 set "midicaminho=%~dp0bem-ti-vi.mp3"
 	if exist "%midicaminho%" (
-     echo Tocando MIDI em segundo plano...
-	 start /B "" "%midicaminho%" >nul 2>&1
+     echo Tocando som em segundo plano...
+	 start /min "" "%midicaminho%" >nul 2>&1
 	) else (
      echo Arquivo não encontrado: %midicaminho%
 	)
@@ -31,7 +31,7 @@ cls
 echo.
 echo ***************************************************
 echo *  *         * *                  *         *   * *
-echo *   [ NoLaser Systems :: StarCheck v1.4 ] *   *   *
+echo *   [ NoLaser Systems :: StarCheck %version% ] *   *   *
 echo * * VERIFICAÇÃO E CORREÇÃO DO SISTEMA  *    *     *
 echo *   Preparando os motores rumo às estrelas...  *  *
 echo *   * *    *             *            *   *       *
@@ -224,50 +224,81 @@ cls
 echo ============================================
 echo     CONFIGURAÇÃO DA MEMÓRIA VIRTUAL
 echo ============================================
-echo.
-echo WMI
-wmic pagefile list /format:list
-set /a total=0
+@REM echo DEBUG WMI
+@REM echo WMI
+@REM wmic pagefile list /format:list
+@REM echo.
+@REM echo DEBUG InitialSize
+@REM wmic path Win32_PageFileSetting get InitialSize
 
 setlocal enabledelayedexpansion
-REM Captura o valor de InitialSize via WMIC
-for /f "skip=1 tokens=*" %%A in ('wmic path Win32_PageFileSetting get InitialSize') do (
-    set "valor=%%A"
-	set "valor=!valor: =!"
-	set /a total+=!valor!
-)
+set /a total=0
+
+REM Captura o valor de InitialSize via WMIC, somando apenas linhas estritamente numéricas
+	for /f "skip=1 tokens=*" %%A in ('wmic path Win32_PageFileSetting get InitialSize') do (
+		set "_tmp=%%A"
+		echo !_tmp! | findstr /r "[0-9]" >nul
+		if not errorlevel 1 call :soma_se_numero "%%A"
+	)
+
+goto depois_soma
+
+:soma_se_numero
+set "valor=%~1"
+REM Remove espaços e caracteres de controle
+set "valor=!valor: =!"
+REM Remove todos os caracteres não numéricos
+for /f "delims=0123456789" %%C in ("!valor!") do set "valor=!valor:%%C=!"
+REM Debug: mostrar valor capturado
+REM echo Debug 1 Valor capturado: '!valor!'
+		REM echo Debug 2 Valor capturado: '!valor!'
+		set "soma=!total!"
+		set /a soma+=!valor!
+		set "total=!soma!"
+		REM echo Total parcial: !total!
+goto :eof
+
+:depois_soma
 
 echo Tamanho inicial da memória virtual: !total! MB
 
 REM Valor recomendado
 set /a recomendado=30000
 
-REM Compara com o recomendado
+echo Tamanho recomendado da memória virtual: !recomendado! MB
+set caminho=%~dp0
+REM Garante que ambos são números
+set /a total=!total!+0
+set /a recomendado=!recomendado!+0
+@REM echo DEBUG: total=!total! recomendado=!recomendado!
+pause
 if !total! GEQ !recomendado! (
-    echo "MEUS PARABEEEEEeeeEEEeeEEENS^! Você está acima do recomendado^! (!recomendado! MB ou 30 GB)"
+	@REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == TRUE
+	echo Parabéns^^! Você está acima do recomendado: !recomendado!MB
 	if exist "%~dp0parabens.m4a" (
-     echo "Tocando em segundo plano... Parabens^!"
+     echo "Playing in background... Congratulations!"
 	 start /B "" "%~dp0parabens.m4a" >nul 2>&1
 	 ) else (
-     	echo Arquivo não encontrado: "%~dp0parabens.m4a"
+     	echo File not found: "%~dp0parabens.m4a"
 	 )
-	
 ) else (
-    echo "Está abaixo do recomendado^! (!recomendado! MB ou 30 GB) ajuste para 30GB ou mais^!"
+	@REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == FALSE
+	echo Está abaixo do recomendado^^! Ajuste para !recomendado!MB ou mais^^!
 	echo.
-	echo Instruções para ajustar a memória virtual:
+	echo Instruções para ajustar a memória virtual^:
 	echo 1. Pressione Win + R, digite "sysdm.cpl" e pressione Enter.
-	echo 2. Vá para a aba "Avançado" e clique em "Configurações..." na seção "Desempenho".
-	echo 3. Na nova janela, vá para a aba "Avançado" e clique em "Alterar..." na seção "Memória Virtual".
+	echo 2. Vá para a aba Avançado e clique em Configurações... na seção Desempenho.
+	echo 3. Na nova janela, vá para a aba Avançado e clique em Alterar... na seção Memória Virtual.
 	echo 4. Desmarque "Gerenciar automaticamente o tamanho do arquivo de paginação para todas as unidades".
-	echo 5. De preferencia selecione uma unidade diferente da do Windows, mas caso somente tenha uma unidade, selecione a unidade onde o Windows está instalado (geralmente C:).
-	echo 6. Selecione "Tamanho personalizado" e defina o "Tamanho inicial" e "Tamanho máximo" para pelo menos 30000 MB (30 GB).
-	echo 7. Clique em "Definir" e depois em "OK" para aplicar as mudanças.
+	echo 5. De preferência selecione uma unidade diferente da do Windows, mas caso só tenha uma unidade, selecione a unidade onde o Windows está instalado geralmente C:.
+	echo 6. Selecione "Tamanho personalizado" e defina o Tamanho inicial e Tamanho máximo para pelo menos !recomendado!MB.
+	echo 7. Clique em Definir e depois em OK para aplicar as mudanças.
 	echo 8. Reinicie o computador para que as mudanças tenham efeito.
+	echo.
+	echo Iniciando o painel de configuração para você...
+	start /B "" "sysdm.cpl" >nul 2>&1
 )
-
 endlocal
-	
 echo.
 echo Se continuar com problemas ^> Ajuste sua memória virtual para no mínimo 30 GB, de preferência em um SSD diferente do Windows.
 echo.
