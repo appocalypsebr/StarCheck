@@ -3,7 +3,11 @@ chcp 1252
 title Verificação e Correção do Sistema Windows
 color 1F
 
-
+echo.
+echo Iniciando StarCheck v1.4...
+echo.
+echo Verificando se está sendo executado como administrador...
+echo.
 :: Verifica se está rodando como administrador
 net session >nul 2>&1
 if %errorlevel% neq 0 (

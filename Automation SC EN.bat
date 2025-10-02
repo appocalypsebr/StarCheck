@@ -2,7 +2,12 @@
 chcp 1252
 title Windows System Check and Repair
 color 1F
-
+set "version=v1.4"
+echo.
+echo Starting StarCheck %version%...
+echo.
+echo Checking if running as administrator...
+echo.
 :: Check if running as administrator
 net session >nul 2>&1
 if %errorlevel% neq 0 (
@@ -26,7 +31,7 @@ cls
 echo.
 echo ***************************************************
 echo *  *         * *                  *         *   * *
-echo *   [ NoLaser Systems :: StarCheck v1.4 ] *   *   *
+echo *   [ NoLaser Systems :: StarCheck "%version%" ] *   *   *
 echo * * SYSTEM CHECK AND REPAIR         *    *     *
 echo *   Preparing for launch to the stars...   *  *
 echo *   * *    *             *            *   *       *

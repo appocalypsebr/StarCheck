@@ -1,4 +1,4 @@
-# StarCheck 1.4
+# StarCheck
 
 ## Overview
 
