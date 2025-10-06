@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project provides scripts for automatic verification and repair of Windows systems, and best settings for running Star Citizen, with support for multiple languages.
+This project provides scripts like a basic checklist for ease verification and repair of Windows systems, and best settings for running Star Citizen.
 
 ### Available Languages
 
@@ -34,7 +34,7 @@ MIT License
 
 # Resumo (PT-BR)
 
-Este projeto fornece scripts para verificação e reparo automático de sistemas Windows, além das melhores configurações para rodar Star Citizen, com suporte a múltiplos idiomas.
+Este projeto fornece scripts em forma de um checklist para verificação e reparo de sistemas Windows, além das melhores configurações para rodar Star Citizen.
 
 ### Idiomas Disponíveis
 

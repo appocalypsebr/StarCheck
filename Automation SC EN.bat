@@ -246,10 +246,10 @@ echo.
 
 REM Recommended value
 set /a recommended=30000
-
+echo Recommended virtual memory size: !recommended! MB
 REM Compare with recommended
 if !total! GEQ !recommended! (
-    echo "CONGRATULATIONS^! You are above the recommended value (!recommended! MB or 30 GB)"
+    echo CONGRATULATIONS^^! You are above the recommended value !recommended!MB"
 	echo.
 	if exist "%~dp0congratulations.mp3" (
      echo "Playing in background... Congratulations!"

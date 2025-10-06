@@ -271,7 +271,6 @@ REM Garante que ambos são números
 set /a total=!total!+0
 set /a recomendado=!recomendado!+0
 @REM echo DEBUG: total=!total! recomendado=!recomendado!
-pause
 if !total! GEQ !recomendado! (
 	@REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == TRUE
 	echo Parabéns^^! Você está acima do recomendado: !recomendado!MB
