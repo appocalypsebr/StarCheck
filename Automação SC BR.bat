@@ -2,7 +2,7 @@
 chcp 1252
 title Verificação e Correção do Sistema Windows
 color 1F
-set "version=v1.7"
+set "version=v1.8"
 echo.
 echo Iniciando StarCheck %version%...
 echo.
@@ -228,12 +228,6 @@ cls
 echo ============================================
 echo     CONFIGURAÇÃO DA MEMÓRIA VIRTUAL
 echo ============================================
-@REM echo DEBUG WMI
-@REM echo WMI
-@REM wmic pagefile list /format:list
-@REM echo.
-@REM echo DEBUG InitialSize
-@REM wmic path Win32_PageFileSetting get InitialSize
 
 setlocal enabledelayedexpansion
 set /a total=0
@@ -276,34 +270,75 @@ set /a total=!total!+0
 set /a recomendado=!recomendado!+0
 @REM echo DEBUG: total=!total! recomendado=!recomendado!
 if !total! GEQ !recomendado! (
-	@REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == TRUE
-	echo Parabéns^^! Você está acima do recomendado: !recomendado!MB
-	if exist "%~dp0parabens.m4a" (
-     echo "Playing in background... Congratulations!"
-	 start /B "" "%~dp0parabens.m4a" >nul 2>&1
-	 ) else (
-     	echo File not found: "%~dp0parabens.m4a"
-	 )
+    @REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == TRUE
+    echo Parabéns^^! Você está acima do recomendado: !recomendado!MB
+    if exist "%~dp0parabens.m4a" (
+        echo "Playing in background... Congratulations!"
+        start /B "" "%~dp0parabens.m4a" >nul 2>&1
+		goto MEMO_FIM
+    ) else (
+        echo File not found: "%~dp0parabens.m4a"
+    )
 ) else (
-	@REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == FALSE
-	echo Está abaixo do recomendado^^! Ajuste para !recomendado!MB ou mais^^!
-	echo.
-	echo Instruções para ajustar a memória virtual^:
-	echo 1. Pressione Win + R, digite "sysdm.cpl" e pressione Enter.
-	echo 2. Vá para a aba Avançado e clique em Configurações... na seção Desempenho.
-	echo 3. Na nova janela, vá para a aba Avançado e clique em Alterar... na seção Memória Virtual.
-	echo 4. Desmarque "Gerenciar automaticamente o tamanho do arquivo de paginação para todas as unidades".
-	echo 5. De preferência selecione uma unidade diferente da do Windows, mas caso só tenha uma unidade, selecione a unidade onde o Windows está instalado geralmente C:.
-	echo 6. Selecione "Tamanho personalizado" e defina o Tamanho inicial e Tamanho máximo para pelo menos !recomendado!MB.
-	echo 7. Clique em Definir e depois em OK para aplicar as mudanças.
-	echo 8. Reinicie o computador para que as mudanças tenham efeito.
-	echo.
-	echo Iniciando o painel de configuração para você...
-	start /B "" "sysdm.cpl" >nul 2>&1
+    @REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == FALSE
+    echo Está abaixo do recomendado
+	echo Ajuste para !recomendado!MB ou mais.
+    echo.
+    echo Escolha uma opção para configurar a memória virtual:
+    echo 1 - Exibir instruções para ajuste manual
+    echo 2 - Tentar ajuste automático no caminho padrão.
+	set /p memopcao=Digite o número da opção desejada: 
+	set memopcao=!memopcao: =!
+	if /i !memopcao! == 1 goto MEMO_MANUAL
+	if /i !memopcao! == 2 goto MEMO_AUTO
+	echo Opção inválida. Exibindo instruções manuais por padrão.
+	goto MEMO_MANUAL
 )
-endlocal
+
+:MEMO_MANUAL
 echo.
-echo Se continuar com problemas ^> Ajuste sua memória virtual para no mínimo 30 GB, de preferência em um SSD diferente do Windows.
+echo Instruções para ajustar a memória virtual^:
+echo 1. Pressione Win + R, digite "sysdm.cpl" e pressione Enter.
+echo 2. Vá para a aba Avançado e clique em Configurações... na seção Desempenho.
+echo 3. Na nova janela, vá para a aba Avançado e clique em Alterar... na seção Memória Virtual.
+echo 4. Desmarque "Gerenciar automaticamente o tamanho do arquivo de paginação para todas as unidades".
+echo 5. De preferência selecione uma unidade diferente da do Windows, mas caso só tenha uma unidade, selecione a unidade onde o Windows está instalado geralmente C:.
+echo 6. Selecione "Tamanho personalizado" e defina o Tamanho inicial e Tamanho máximo para pelo menos !recomendado!MB.
+echo 7. Clique em Definir e depois em OK para aplicar as mudanças.
+echo 8. Reinicie o computador para que as mudanças tenham efeito.
+echo.
+echo Iniciando o painel de configuração para você...
+start /B "" "sysdm.cpl" >nul 2>&1
+goto MEMO_FIM
+
+:MEMO_AUTO
+echo.
+echo Listando unidades e espaço livre...
+echo ---Configurações atuais do Pagefile---
+powershell -NoProfile -Command "Get-CimInstance -ClassName Win32_PageFileSetting | ForEach-Object { \"Arquivo: $($_.Name) - Inicial: $($_.InitialSize) MB - Máximo: $($_.MaximumSize) MB\" } | Out-String -Stream | ? { $_.Trim() -ne '' }"
+echo -------------------------------------
+echo ---Unidades disponíveis---
+powershell -NoProfile -Command "Get-CimInstance Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 -and $_.Size -gt 0 -and $_.DeviceID -match '^[A-Z]:$' } | ForEach-Object { if ($_.FreeSpace -ne $null -and $_.Size -ne $null) { \"Unidade: $($_.DeviceID) - Label: $($_.VolumeName) - Livre: $([math]::Round($_.FreeSpace/1GB,1)) GB / Total: $([math]::Round($_.Size/1GB,1)) GB\" } } | Out-String -Stream | ? { $_.Trim() -ne '' }"
+echo -------------------------
+echo.
+set /p unidade=Digite a letra da unidade desejada para o arquivo de paginação (ex: D): 
+set unidade=!unidade:~0,1!
+set unidade=!unidade!:
+set "pagefile=!unidade!\\pagefile.sys"
+echo.
+echo Tentando ajuste automático da memória virtual para !recomendado!MB na unidade !unidade!...
+set "pagefilePS=!unidade!\pagefile.sys"
+powershell -NoProfile -Command "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'PagingFiles' -Value ('!pagefilePS! !recomendado! !recomendado!'); Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'AutomaticManagedPagefile' -Value 0; Write-Host 'Configuração aplicada. Reinicie o computador.'"
+echo.
+echo Ajuste automático concluído (se não houver erro acima).
+echo.
+echo ATENÇÃO: Salve seu trabalho e feche todos os programas em funcionamento.
+echo O computador será reiniciado automaticamente em 30 segundos para aplicar as mudanças de memória virtual.
+shutdown /r /t 30
+goto MEMO_FIM
+
+:MEMO_FIM
+endlocal
 echo.
 echo Se continuar com problemas abra o launcher, clique na engrenagem e selecione "Verificar arquivos".
 echo.
@@ -315,7 +350,7 @@ goto MENU
 :REPORT
 cls
 echo ============================================
-echo     CONFIGURAÇÃO DA MEMÓRIA VIRTUAL
+echo     GERANDO RELATÓRIO DO SISTEMA
 echo ============================================
 echo.
 echo. > "%~dp0relatorio.txt" 2>&1

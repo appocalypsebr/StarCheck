@@ -2,7 +2,7 @@
 chcp 1252
 title Windows System Check and Repair
 color 1F
-set "version=v1.7"
+set "version=v1.8"
 echo.
 echo Starting StarCheck %version%...
 echo.
@@ -227,61 +227,107 @@ cls
 echo ============================================
 echo     VIRTUAL MEMORY CONFIGURATION
 echo ============================================
-@REM echo DEBUG WMI
-@REM echo WMI
-@REM wmic pagefile list /format:list
-@REM echo.
-@REM echo DEBUG InitialSize
-@REM wmic path Win32_PageFileSetting get InitialSize
-
+setlocal enabledelayedexpansion
 set /a total=0
 
-setlocal enabledelayedexpansion
-REM Get InitialSize value via WMIC
+REM Capture InitialSize value via WMIC, summing only strictly numeric lines
 for /f "skip=1 tokens=*" %%A in ('wmic path Win32_PageFileSetting get InitialSize') do (
-    set "value=%%A"
-	set "value=!value: =!"
-	set /a total+=!value!
+	set "_tmp=%%A"
+	echo !_tmp! | findstr /r "[0-9]" >nul
+	if not errorlevel 1 call :sum_if_number "%%A"
 )
 
-echo.
+goto after_sum
+
+:sum_if_number
+set "value=%~1"
+REM Remove spaces and control characters
+set "value=!value: =!"
+REM Remove all non-numeric characters
+for /f "delims=0123456789" %%C in ("!value!") do set "value=!value:%%C=!"
+set "sum=!total!"
+set /a sum+=!value!
+set "total=!sum!"
+goto :eof
+
+:after_sum
+
 echo Initial virtual memory size: !total! MB
-echo.
 
-REM Recommended value
-set /a recommended=30000
+set /a recommended=31003
 echo Recommended virtual memory size: !recommended! MB
-REM Compare with recommended
-if !total! GEQ !recommended! (
-    echo CONGRATULATIONS^^! You are above the recommended value !recommended!MB"
-	echo.
-	if exist "%~dp0congratulations.mp3" (
-     echo "Playing in background... Congratulations!"
-	 start /B "" "%~dp0congratulations.mp3" >nul 2>&1
-	 ) else (
-     	echo File not found: "%~dp0congratulations.mp3"
-	 )
 
+set pathdir=%~dp0
+set /a total=!total!+0
+set /a recommended=!recommended!+0
+if !total! GEQ !recommended! (
+	echo Congratulations! You are above the recommended value: !recommended!MB
+	if exist "%~dp0congratulations.mp3" (
+		echo "Playing in background... Congratulations!"
+		start /B "" "%~dp0congratulations.mp3" >nul 2>&1
+		goto MEMO_END
+	) else (
+		echo File not found: "%~dp0congratulations.mp3"
+	)
 ) else (
-	echo Below recommended^^! Please set it to above the !recommended!MB or more^^!
-	echo Instructions to adjust your virtual memory:
-	echo 1. Press Win + R, type "sysdm.cpl" and press Enter.
-	echo 2. Go to the "Advanced" tab and click "Settings..." in the "Performance" section.
-	echo 3. In the new window, go to the "Advanced" tab and click "Change..." in the "Virtual Memory" section.
-	echo 4. Uncheck "Automatically manage paging file size for all drives".
-	echo 5. Preferably select a drive different from Windows, but if you only have one, select the drive where Windows is installed ^(usually C:^).
-	echo 6. Select "Custom size" and set both "Initial size" and "Maximum size" to at least !recommended!MB.
-	echo 7. Click "Set" and then "OK" to apply the changes.
-	echo 8. Restart your computer for the changes to take effect.
+	echo Below recommended.
+	echo Please set it to !recommended!MB or more.
 	echo.
-	echo Starting the configuration panel for you...
-	start /B "" "sysdm.cpl" >nul 2>&1
+	echo Choose an option to configure virtual memory:
+	echo 1 - Show manual adjustment instructions
+	echo 2 - Try automatic adjustment on the default path.
+	set /p memoption=Enter the desired option number: 
+	set memoption=!memoption: =!
+	if /i !memoption! == 1 goto MEMO_MANUAL
+	if /i !memoption! == 2 goto MEMO_AUTO
+	echo Invalid option. Showing manual instructions by default.
+	goto MEMO_MANUAL
 )
 
-endlocal
-
+:MEMO_MANUAL
 echo.
-echo If you still have issues > Set your virtual memory to at least 30 GB, preferably on a different SSD from Windows.
+echo Instructions to adjust virtual memory:
+echo 1. Press Win + R, type "sysdm.cpl" and press Enter.
+echo 2. Go to the Advanced tab and click Settings... in the Performance section.
+echo 3. In the new window, go to the Advanced tab and click Change... in the Virtual Memory section.
+echo 4. Uncheck "Automatically manage paging file size for all drives".
+echo 5. Preferably select a drive different from Windows, but if you only have one, select the drive where Windows is installed (usually C:).
+echo 6. Select "Custom size" and set both Initial size and Maximum size to at least !recommended!MB.
+echo 7. Click Set and then OK to apply the changes.
+echo 8. Restart your computer for the changes to take effect.
+echo.
+echo Opening the configuration panel for you...
+start /B "" "sysdm.cpl" >nul 2>&1
+goto MEMO_END
+
+:MEMO_AUTO
+echo.
+echo Listing drives and free space...
+echo ---Current Pagefile Settings---
+powershell -NoProfile -Command "Get-CimInstance -ClassName Win32_PageFileSetting | ForEach-Object { \"File: $($_.Name) - Initial: $($_.InitialSize) MB - Maximum: $($_.MaximumSize) MB\" } | Out-String -Stream | ? { $_.Trim() -ne '' }"
+echo --------------------------------
+echo ---Available Drives---
+powershell -NoProfile -Command "Get-CimInstance Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 -and $_.Size -gt 0 -and $_.DeviceID -match '^[A-Z]:$' } | ForEach-Object { if ($_.FreeSpace -ne $null -and $_.Size -ne $null) { \"Drive: $($_.DeviceID) - Label: $($_.VolumeName) - Free: $([math]::Round($_.FreeSpace/1GB,1)) GB / Total: $([math]::Round($_.Size/1GB,1)) GB\" } } | Out-String -Stream | ? { $_.Trim() -ne '' }"
+echo ----------------------
+echo.
+set /p drive=Enter the drive letter you want to use for the pagefile (e.g., D): 
+set drive=!drive:~0,1!
+set drive=!drive!:
+set "pagefile=!drive!\\pagefile.sys"
+echo.
+echo Attempting to automatically set virtual memory to !recommended!MB on drive !drive!...
+set "pagefilePS=!drive!\pagefile.sys"
+powershell -NoProfile -Command "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'PagingFiles' -Value ('!pagefilePS! !recommended! !recommended!'); Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'AutomaticManagedPagefile' -Value 0; Write-Host 'Configuration applied. Please restart your computer.'"
+echo.
+echo Automatic adjustment completed (if no error above).
+echo.
+echo ATTENTION: Save your work and close all running programs.
+echo The computer will automatically restart in 30 seconds to apply the virtual memory changes.
+shutdown /r /t 30
+goto MEMO_END
+
+:MEMO_END
+endlocal
 echo.
 echo If you still have issues, open the launcher, click the gear icon and select "Verify files".
 echo.
@@ -290,10 +336,11 @@ echo.
 pause
 goto MENU
 
+
 :REPORT
 cls
 echo ============================================
-echo     VIRTUAL MEMORY CONFIGURATION
+echo     REPORT GENERATION
 echo ============================================
 echo.
 echo. > "%~dp0report.txt" 2>&1
