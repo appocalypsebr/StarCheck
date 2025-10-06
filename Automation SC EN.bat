@@ -2,7 +2,7 @@
 chcp 1252
 title Windows System Check and Repair
 color 1F
-set "version=v1.6"
+set "version=v1.7"
 echo.
 echo Starting StarCheck %version%...
 echo.
@@ -28,7 +28,6 @@ endlocal
 
 :MENU
 cls
-echo.
 echo ***************************************************
 echo *  *         * *                  *         *   * *
 echo *   [ NoLaser Systems :: StarCheck %version% ] *   *   *
@@ -36,6 +35,11 @@ echo * * SYSTEM CHECK AND REPAIR         *    *     *
 echo *   Preparing for launch to the stars...   *  *
 echo *   * *    *             *            *   *       *
 echo ***************************************************
+echo Option 4 - Run cleanup after every game update.
+echo Option 6 - For issues like not launching, crashes, or freezes.
+echo Option 7 - Adjust virtual memory if you have performance problems.
+echo Option 9 - For in-game bugs like stuck/dead character.
+echo Problem solved^?^! Share this script with your friends^!
 echo.
 echo 1 - Run only SFC (Check Disk)
 echo 2 - Run only DISM (Check Windows Installation)

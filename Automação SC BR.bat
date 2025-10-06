@@ -2,7 +2,7 @@
 chcp 1252
 title Verificação e Correção do Sistema Windows
 color 1F
-set "version=v1.6"
+set "version=v1.7"
 echo.
 echo Iniciando StarCheck %version%...
 echo.
@@ -28,7 +28,6 @@ endlocal
 
 :MENU
 cls
-echo.
 echo ***************************************************
 echo *  *         * *                  *         *   * *
 echo *   [ NoLaser Systems :: StarCheck %version% ] *   *   *
@@ -36,6 +35,11 @@ echo * * VERIFICAÇÃO E CORREÇÃO DO SISTEMA  *    *     *
 echo *   Preparando os motores rumo às estrelas...  *  *
 echo *   * *    *             *            *   *       *
 echo ***************************************************
+echo Opção 4 - Executar a limpeza sempre após cada atualização do jogo.
+echo Opção 6 - Para problemas como não abre, travamentos ou crashes.
+echo Opção 7 - Ajustar a memória virtual se estiver com problemas de performance.
+echo Opção 9 - Para problemas como bugs dentro do jogo, como morto vivo.
+echo Problema resolvido^?^! Compartilhe este script com seus amigos^!
 echo.
 echo 1 - Executar apenas SFC (Verificar Disco)
 echo 2 - Executar apenas DISM (Verificar Instalação Windows)
