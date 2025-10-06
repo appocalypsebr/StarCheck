@@ -323,6 +323,7 @@ echo Automatic adjustment completed (if no error above).
 echo.
 echo ATTENTION: Save your work and close all running programs.
 echo The computer will automatically restart in 30 seconds to apply the virtual memory changes.
+pause
 shutdown /r /t 30
 goto MEMO_END
 

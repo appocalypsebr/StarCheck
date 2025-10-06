@@ -261,7 +261,7 @@ goto :eof
 echo Tamanho inicial da memória virtual: !total! MB
 
 REM Valor recomendado
-set /a recomendado=30000
+set /a recomendado=32000
 
 echo Tamanho recomendado da memória virtual: !recomendado! MB
 set caminho=%~dp0
@@ -273,11 +273,11 @@ if !total! GEQ !recomendado! (
     @REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == TRUE
     echo Parabéns^^! Você está acima do recomendado: !recomendado!MB
     if exist "%~dp0parabens.m4a" (
-        echo "Playing in background... Congratulations!"
+        echo "Tocando som em segundo plano... Parabéns!"
         start /B "" "%~dp0parabens.m4a" >nul 2>&1
 		goto MEMO_FIM
     ) else (
-        echo File not found: "%~dp0parabens.m4a"
+        echo Arquivo não encontrado: "%~dp0parabens.m4a"
     )
 ) else (
     @REM echo DEBUG TESTE IF: !total! GEQ !recomendado! == FALSE
@@ -334,6 +334,7 @@ echo Ajuste automático concluído (se não houver erro acima).
 echo.
 echo ATENÇÃO: Salve seu trabalho e feche todos os programas em funcionamento.
 echo O computador será reiniciado automaticamente em 30 segundos para aplicar as mudanças de memória virtual.
+pause
 shutdown /r /t 30
 goto MEMO_FIM
 
