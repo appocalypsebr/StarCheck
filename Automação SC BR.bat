@@ -41,12 +41,12 @@ echo Opção 7 - Ajustar a memória virtual se estiver com problemas de performance
 echo Opção 9 - Para problemas como bugs dentro do jogo, como morto vivo.
 echo Problema resolvido^?^! Compartilhe este script com seus amigos^!
 echo.
-echo 1 - Executar apenas SFC (Verificar Disco)
-echo 2 - Executar apenas DISM (Verificar Instalação Windows)
-echo 3 - Executar ambos (SFC e DISM)
+echo 1 - Executar apenas DISM (Verificar Instalação Windows)
+echo 2 - Executar apenas SFC (Verificar Disco)
+echo 3 - Executar ambos (DISM e SFC)
 echo 4 - Executar Limpeza do SC (Remove pasta temporária do Star Citizen)
 echo 5 - Abrir RSI Launcher
-echo 6 - Executar Tudo (SFC + DISM + Limpeza do SC)
+echo 6 - Executar Tudo (DISM + SFC + Limpeza do SC)
 echo 7 - Memoria Virtual (Recomendado 30GB ou mais)
 echo 8 - Gerar Relatório do Sistema
 echo 9 - Resetar Conta RSI (Se estiver com problemas dentro do jogo)
@@ -54,8 +54,8 @@ echo 0 - Sair
 echo.
 set /p opcao=Escolha uma opção: 
 
-if "%opcao%"=="1" goto SFC
-if "%opcao%"=="2" goto DISM
+if "%opcao%"=="1" goto DISM
+if "%opcao%"=="2" goto SFC
 if "%opcao%"=="3" goto AMBOS
 if "%opcao%"=="4" goto SC
 if "%opcao%"=="5" goto RSI
@@ -104,12 +104,12 @@ echo ============================================
 echo     EXECUTANDO DISM E SFC
 echo ============================================
 echo.
-echo Executando SFC...
-sfc /scannow
-echo SFC concluído.
 echo Executando DISM...
 DISM /Online /Cleanup-Image /RestoreHealth
 echo DISM concluído.
+echo Executando SFC...
+sfc /scannow
+echo SFC concluído.
 echo.
 echo Se continuar com problemas abra o launcher, clique na engrenagem e selecione "Verificar arquivos".
 echo.

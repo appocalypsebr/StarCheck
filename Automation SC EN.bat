@@ -41,12 +41,12 @@ echo Option 7 - Adjust virtual memory if you have performance problems.
 echo Option 9 - For in-game bugs like stuck/dead character.
 echo Problem solved^?^! Share this script with your friends^!
 echo.
-echo 1 - Run only SFC (Check Disk)
-echo 2 - Run only DISM (Check Windows Installation)
-echo 3 - Run both (SFC and DISM)
+echo 1 - Run only DISM (Check Windows Installation)
+echo 2 - Run only SFC (Check Disk)
+echo 3 - Run both (DISM and SFC)
 echo 4 - Run SC Cleanup (Remove Star Citizen temp folder)
 echo 5 - Open RSI Launcher
-echo 6 - Run All (SFC + DISM + SC Cleanup)
+echo 6 - Run All (DISM + SFC + SC Cleanup)
 echo 7 - Virtual Memory (Recommend 30GB or more)
 echo 8 - Generate System Report
 echo 9 - RSI Account Reset (If you are having issues inside the game)
@@ -54,8 +54,8 @@ echo 0 - Exit
 echo.
 set /p option=Choose an option: 
 
-if "%option%"=="1" goto SFC
-if "%option%"=="2" goto DISM
+if "%option%"=="1" goto DISM
+if "%option%"=="2" goto SFC
 if "%option%"=="3" goto BOTH
 if "%option%"=="4" goto SC
 if "%option%"=="5" goto RSI
@@ -104,12 +104,12 @@ echo ============================================
 echo     RUNNING DISM AND SFC
 echo ============================================
 echo.
-echo Running SFC...
-sfc /scannow
-echo SFC completed.
 echo Running DISM...
 DISM /Online /Cleanup-Image /RestoreHealth
 echo DISM completed.
+echo Running SFC...
+sfc /scannow
+echo SFC completed.
 echo.
 echo If you still have issues, open the launcher, click the gear icon and select "Verify files".
 echo.
