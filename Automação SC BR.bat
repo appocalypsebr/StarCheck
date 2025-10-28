@@ -334,6 +334,8 @@ echo Ajuste automático concluído (se não houver erro acima).
 echo.
 echo ATENÇÃO: Salve seu trabalho e feche todos os programas em funcionamento.
 echo O computador será reiniciado automaticamente em 30 segundos para aplicar as mudanças de memória virtual.
+echo Aproveite e verifique se o Resizeble BAR está ativado no seu sistema para melhorar a performance do jogo.
+echo Caso seu processador seja AMD x3D, certifique-se de que o AMD Smart Access Memory esteja habilitado na BIOS.
 pause
 shutdown /r /t 30
 goto MEMO_FIM

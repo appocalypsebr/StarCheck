@@ -323,6 +323,8 @@ echo Automatic adjustment completed (if no error above).
 echo.
 echo ATTENTION: Save your work and close all running programs.
 echo The computer will automatically restart in 30 seconds to apply the virtual memory changes.
+echo Make sure to check if Resizable BAR is enabled on your system to improve game performance.
+echo If your processor is AMD x3D, ensure that AMD Smart Access Memory is enabled in the BIOS.
 pause
 shutdown /r /t 30
 goto MEMO_END
