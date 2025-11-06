@@ -35,9 +35,12 @@ echo * * VERIFICAÇÃO E CORREÇÃO DO SISTEMA  *    *     *
 echo *   Preparando os motores rumo às estrelas...  *  *
 echo *   * *    *             *            *   *       *
 echo ***************************************************
+echo Problemas conhecidos e suas soluções:
+echo ERRO 19000 Certificado digital inválido
+echo ERRO no Anti Cheat geralmente relacionados a drivers da AMD.
 echo Opção 4 - Executar a limpeza sempre após cada atualização do jogo.
 echo Opção 6 - Para problemas como não abre, travamentos ou crashes.
-echo Opção 7 - Ajustar a memória virtual se estiver com problemas de performance.
+echo Opção 7 - Se você tem menos de 64GB de Memoria RAM e problemas de performance.
 echo Opção 9 - Para problemas como bugs dentro do jogo, como morto vivo.
 echo Problema resolvido^?^! Compartilhe este script com seus amigos^!
 echo.
