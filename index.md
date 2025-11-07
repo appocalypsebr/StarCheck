@@ -72,6 +72,7 @@ A terminal app that guides users through questions.
 ![Screenshot EN](images/screenshotEN.png)
 
 **[PT] Versão em Português:**  
+![Screenshot Executavel BR](images/Binario.png)
 ![Screenshot BR](images/screenshotBR.png)
 
 ---
