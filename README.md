@@ -1,65 +1,98 @@
-# StarCheck
+# ?? StarCheck
 
-## Overview
+**???? Ferramenta gratuita para diagnóstico e otimização do Windows, com foco em desempenho para Star Citizen.**  
+**???? Free tool for diagnosing and optimizing Windows systems, focused on Star Citizen performance.**
 
-This project provides scripts like a basic checklist for ease verification and repair of Windows systems, and best settings for running Star Citizen.
+Scripts automatizados e binário interativo para verificar, corrigir e ajustar seu sistema com facilidade.  
+Automated scripts and an interactive binary to check, fix, and tune your system with ease.
 
-### Available Languages
+---
 
-- **Portuguese (BR):** `AutomaÃ§Ã£o SC BR.bat`
-- **English (EN):** `Automation SC EN.bat`
+## ?? Modos de Execução | Execution Modes
 
-Choose the script that matches your preferred language.
+O StarCheck oferece duas formas de uso:  
+StarCheck offers two ways to run:
 
-## Usage
+### 1. ??? Scripts `.BAT`
 
-1. Download or clone this repository.
-2. Run the `.bat` file for your language:
-   - For Portuguese: Double-click `AutomaÃ§Ã£o SC BR.bat`
-   - For English: Double-click `Automation SC EN.bat`
-3. Follow the on-screen instructions.
+- `Automação SC BR.bat` — ???? Português  
+- `Automation SC EN.bat` — ???? English
 
-## Screenshots
-**English (EN) Version:**
+**Funcionalidades | Features:**
 
-![StarCheck EN Screenshot](images/screenshotEN.png)
+- Diagnóstico com SFC e DISM | System diagnostics with SFC and DISM  
+- Ajustes para Star Citizen (x3D, Resizeable BAR, etc.)  
+- Limpeza de cache e otimizações | Cache cleanup and optimizations  
+- Interface em modo texto com instruções claras | Text-based interface with clear instructions
 
-## Contribution
+---
 
-Feel free to contribute translations or improvements! To add another language, copy one of the existing scripts, translate the text outputs, and submit a pull request.
+### 2. ?? Executável `.EXE` Interativo | Interactive `.EXE` Binary
 
-## License
+Agora disponível como binário compilado, o `StarCheck.exe` oferece uma interface com perguntas e respostas.  
+Now available as a compiled binary, `StarCheck.exe` provides a terminal-based Q&A interface.
 
-MIT License
+#### ? Perguntas Frequentes | Frequently Asked Questions
 
-# Resumo (PT-BR)
+**?? O que é o StarCheck.exe?**  
+Um aplicativo de terminal que guia o usuário por meio de perguntas.  
+**?? What is StarCheck.exe?**  
+A terminal app that guides users through questions.
 
-Este projeto fornece scripts em forma de um checklist para verificaÃ§Ã£o e reparo de sistemas Windows, alÃ©m das melhores configuraÃ§Ãµes para rodar Star Citizen.
+**?? Benefícios | Benefits:**
 
-### Idiomas DisponÃ­veis
+- Interface interativa | Interactive interface  
+- Evita erros acidentais | Prevents accidental misuse  
+- Ideal para iniciantes | Great for beginners  
+- Mesmas funções dos `.bat` | Same features as `.bat` scripts
 
-- **PortuguÃªs (BR):** `AutomaÃ§Ã£o SC BR.bat`
-- **InglÃªs (EN):** `Automation SC EN.bat`
+**?? Como usar | How to use:**
 
-Escolha o script que corresponde ao seu idioma preferido.
+1. Baixe em [Releases](https://github.com/appocalypsebr/StarCheck/releases)  
+2. Execute como administrador | Run as administrator  
+3. Responda às perguntas | Answer the questions  
+4. O programa aplicará os ajustes | The program will apply the selected actions
 
-## Como Usar
+**?? Permissões de administrador?** Sim.  
+**?? Admin permissions?** Yes.
 
-1. Baixe ou clone este repositÃ³rio.
-2. Execute o arquivo `.bat` do seu idioma:
-   - Para PortuguÃªs: Clique duas vezes em `AutomaÃ§Ã£o SC BR.bat`
-   - Para InglÃªs: Clique duas vezes em `Automation SC EN.bat`
-3. Siga as instruÃ§Ãµes na tela.
+**?? Posso continuar usando os `.bat`?** Claro!  
+**?? Can I still use `.bat` files?** Absolutely!
 
-## Imagens
-**Portuguese (BR) Version:**
+---
 
-![StarCheck BR Screenshot](images/screenshotBR.png)
+## ?? Imagens | Screenshots
 
-## ContribuiÃ§Ã£o
+**???? English Version:**  
+![Screenshot EN](images/screenshotEN.png)
 
-Sinta-se Ã  vontade para contribuir com traduÃ§Ãµes ou melhorias! Para adicionar outro idioma, copie um dos scripts existentes, traduza as mensagens e envie um pull request.
+**???? Versão em Português:**  
+![Screenshot BR](images/screenshotBR.png)
 
-## LicenÃ§a
+---
 
-LicenÃ§a MIT
+## ?? Como Começar | Getting Started
+
+1. Clone ou baixe este repositório | Clone or download this repository  
+2. Escolha `.bat` ou `.exe` | Choose `.bat` or `.exe`  
+3. Execute como administrador | Run as administrator  
+4. Siga as instruções | Follow the instructions
+
+---
+
+## ?? Contribua | Contribute
+
+Quer adicionar outro idioma ou melhorar os scripts?  
+Want to add another language or improve the scripts?
+
+Copie um `.bat`, traduza e envie um pull request.  
+Copy a `.bat`, translate it, and submit a pull request.
+
+---
+
+## ?? Licença | License
+
+Distribuído sob a **Licença MIT** — livre para usar, modificar e compartilhar.  
+Distributed under the **MIT License** — free to use, modify, and share.
+
+---

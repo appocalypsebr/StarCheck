@@ -1,6 +1,7 @@
 # Ignore Windows-only folder and all zip files
 Verificação Automatica do Windows/
 Windows Only/
+backups/
 *.zip
 relatorio.txt
 report.txt
