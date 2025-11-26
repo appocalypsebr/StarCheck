@@ -5,6 +5,12 @@ title: StarCheck
 
 # StarCheck
 
+## Download — StarCheck v1.8 (EXE)
+
+**Get the latest binary:** [Download StarCheck.exe (v1.8)](https://github.com/appocalypsebr/StarCheck/releases)
+
+Download the executable and run it as Administrator. The release page contains SHA256 checksums and additional assets.  
+
 **[PT] Ferramenta gratuita para diagnóstico e otimização do Windows, com foco em desempenho para Star Citizen.**  
 **[EN] Free tool for diagnosing and optimizing Windows systems, focused on Star Citizen performance.**
 
