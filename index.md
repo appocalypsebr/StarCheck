@@ -5,9 +5,9 @@ title: StarCheck
 
 # StarCheck
 
-## Download — StarCheck v1.8 (EXE)
+## Download — StarCheck (EXE)
 
-**Get the latest binary:** [Download StarCheck.exe (v1.8)](https://github.com/appocalypsebr/StarCheck/releases)
+**Get the latest binary:** [Download StarCheck.exe](https://github.com/appocalypsebr/StarCheck/releases)
 
 Download the executable and run it as Administrator. The release page contains SHA256 checksums and additional assets.  
 
